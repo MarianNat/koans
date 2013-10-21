@@ -15,11 +15,18 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
+  a1, b1, c1 = [a, b, c].sort
   case 
+    when a <= 0 || b <= 0 || c <= 0
+      raise TriangleError, "A triangle should not have any sides of length 0"
+
+    when (a1 + b1) <= c1
+      raise TriangleError, "Any two sides of a triangle should add up to more than the third side"
+
   	when a == b && a == c
   		return :equilateral
 
-  	when a == b || a == c || b == c
+  	when (a == b && a != c) || (a == c && a != b) || (b == c && b != a)
   		return :isosceles
   		
   	when a != b && a != c && b != c
